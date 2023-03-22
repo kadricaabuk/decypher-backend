@@ -1,9 +1,17 @@
-export const handleResponse = (response) => {
+import { useValidate } from "./Hooks/index.js"
+
+export const handleResponse = ({response, statusCode=200, success=true, message="Successfull"}) => {
     return {
-        status: 200,
+        statusCode,
         response: {
-            success: true,
+            success,
+            message,
             data: response
         }
     }
+}
+
+export const dataValidation = (data) => {
+    const isValid = useValidate('user-form', data)
+    return isValid
 }

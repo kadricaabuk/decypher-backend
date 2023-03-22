@@ -1,16 +1,15 @@
-class Auth{
-    static validate(req, res,next){
-        // var token = req.header('x-auth');
-        // getUserByToken(token).then((result)=>{
-        //     req.user = result;
-        //     req.token = token;
-        //     next();
-        // }).catch((e)=>{
-            //     return res.status(401).send();
-            // });
+import { dataValidation } from "../controllers/globalFunctions.js"
 
-        next()
+class Auth{
+    static validate(req, res, next){
+        const isValid = dataValidation(req.body)
+        if(isValid.success){
+            next()
+        }else{
+            res.send(isValid)
+        }
     }
         
 }
+
 export default Auth 
