@@ -24,3 +24,27 @@ export const saveUser = async (user) => {
         );
     })
 }
+export const getUserByEmail = async (email) => {
+    return new Promise((resolve, reject) => {
+        db.query('SELECT * FROM users WHERE email=?', [email], function (error, results, fields) {
+            if (error){
+                reject()
+                throw new Error(error)
+            }else{
+                resolve(results)
+            }
+        });
+    })
+}
+export const loginUser = async ({email, password}) => {
+    return new Promise((resolve, reject) => {
+        db.query('SELECT * FROM users WHERE email=? AND password=?', [email, password], function (error, results, fields) {
+            if (error){
+                reject()
+                throw new Error(error)
+            }else{
+                resolve(results)
+            }
+        });
+    })
+}
